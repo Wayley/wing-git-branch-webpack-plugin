@@ -1,0 +1,34 @@
+{
+  "name": "wing-git-branch-webpack-plugin",
+  "version": "0.0.1",
+  "description": "wing git branch webpack plugin",
+  "keywords": [
+    "wing",
+    "plugin"
+  ],
+  "main": "dist/wing-git-branch-webpack-plugin.es.js",
+  "module": "dist/wing-git-branch-webpack-plugin.es.js",
+  "unpkg": "dist/wing-git-branch-webpack-plugin.js",
+  "scripts": {
+    "build": "rollup --config"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.15.5",
+    "rollup": "^2.56.3",
+    "rollup-plugin-babel": "^4.4.0",
+    "rollup-plugin-terser": "^7.0.2"
+  },
+  "author": {
+    "name": "Robben Wayley",
+    "email": "hb_wangzheng@163.com"
+  },
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Wayley/wing-git-branch-webpack-plugin.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Wayley/wing-git-branch-webpack-plugin/issues"
+  },
+  "homepage": "https://github.com/Wayley/wing-git-branch-webpack-plugin#readme"
+}

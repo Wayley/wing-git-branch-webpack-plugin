@@ -1,2 +1,3 @@
 # wing-git-branch-webpack-plugin
-webpack git branch plugin
+
+wing git branch webpack plugin
