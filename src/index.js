@@ -6,10 +6,13 @@ function getGitBranchInfo() {
   return [
     `BranchName: ${git("name-rev --name-only HEAD")}`,
     `CommitHash: ${git("show -s --format=%H")}`,
-    `Author: ${git("show -s --format=%cn")} <${git("show -s --format=%ce")}>`,
-    `Date: ${git("show -s --format=%cd")}`,
     `Description: ${git("show -s --format=%s")}`,
-  ];
+    `Committer: ${git("show -s --format=%cn")} <${git(
+      "show -s --format=%ce"
+    )}>`,
+    `CommitDate: ${new Date(git("show -s --format=%cd"))}`,
+    `Date: ${new Date()}`,
+  ].join("\n");
 }
 class WingGitBranchWebpackPlugin {
   static defaultOptions = {
@@ -19,25 +22,17 @@ class WingGitBranchWebpackPlugin {
     this.options = { ...WingGitBranchWebpackPlugin.defaultOptions, ...options };
   }
   apply(compiler) {
-    const pluginName = WingGitBranchWebpackPlugin.name;
-    const { webpack } = compiler;
-    const { Compilation } = webpack;
-    const { RawSource } = webpack.sources;
-    compiler.hooks.thisCompilation.tap(pluginName, (compilation) => {
-      compilation.hooks.processAssets.tap(
-        {
-          name: pluginName,
-          stage: Compilation.PROCESS_ASSETS_STAGE_SUMMARIZE,
-        },
-        (assets) => {
-          const content = getGitBranchInfo().join("\n");
-          compilation.emitAsset(
-            this.options.outputFile,
-            new RawSource(content)
-          );
-        }
-      );
-    });
+    compiler.hooks.emit.tapAsync(
+      "WingGitBranchWebpackPlugin",
+      (compilation, callback) => {
+        const content = getGitBranchInfo();
+        compilation.assets[this.options.outputFile] = {
+          source: () => content,
+          size: () => content.length,
+        };
+        callback();
+      }
+    );
   }
 }
 
