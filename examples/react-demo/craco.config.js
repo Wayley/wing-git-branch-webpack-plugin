@@ -1,4 +1,4 @@
-const WingGitBranchWebpackPlugin = require("wing-git-branch-webpack-plugin");
+const WingGitBranchWebpackPlugin = require("../../dist/wing-git-branch-webpack-plugin.cjs");
 
 module.exports = {
   webpack: {
