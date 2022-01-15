@@ -1,9 +1,16 @@
 const child_process = require("child_process");
+const { resolve } = require("path");
+
+function getVersion() {
+  const { version } = require(resolve(process.cwd(), "package.json"));
+  return version != undefined ? version : "";
+}
 function git(command) {
   return child_process.execSync(`git ${command}`, { encoding: "utf8" }).trim();
 }
 function getGitBranchInfo() {
   return [
+    `Version: ${getVersion()}`,
     `BranchName: ${git("name-rev --name-only HEAD")}`,
     `CommitHash: ${git("show -s --format=%H")}`,
     `Description: ${git("show -s --format=%s")}`,

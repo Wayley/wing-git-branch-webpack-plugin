@@ -1,6 +1,6 @@
 {
   "name": "wing-git-branch-webpack-plugin",
-  "version": "0.0.3",
+  "version": "0.0.31",
   "description": "wing git branch webpack plugin",
   "keywords": [
     "wing",
